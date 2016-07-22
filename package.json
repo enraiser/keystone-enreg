@@ -1,0 +1,26 @@
+{
+  "name": "keystone-enreg",
+  "version": "0.0.1",
+  "description": "keystone registration,login, email verification",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/bgag/keystone-enreg.git"
+  },
+  "keywords": [
+    "keystone",
+    "enreg"
+  ],
+  "author": {
+    "name": "Sachin Sharma",
+    "email": "sachin@enraiser.com",
+    "url": "https://www.enraiser.com"
+  },  
+  "license": "MIT",
+  "dependencies": {
+    "keystone-enmailer": "^0.0.1"
+  },
+}
