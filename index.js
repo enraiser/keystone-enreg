@@ -14,7 +14,9 @@ var routes = function (app) {
 	app.get('/signup', views.signup);
 	app.get('/signin', views.signin);
 
+
 	app.post('/action/signup', actions.signup);
+	app.get('/action/verify', actions.verify);
 	app.post('/action/signin', actions.signin);
 	app.get('/action/signout', actions.signout);
 }
