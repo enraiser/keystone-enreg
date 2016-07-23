@@ -1,0 +1,28 @@
+extends ../../../../templates/layouts/default
+
+block content
+	.container
+		if user
+			a(class='btn btn-primary',href='/purchase') Purchase
+		else
+			form.signup-form(method="post" action="action/signin").row.col-sm-8.col-md-6
+				input(type='hidden', name='action',  value='action/signin')
+
+				.form-group
+					label Email             
+					input.form-control.input-box(type='email', name='email', placeholder='Email')
+				.form-group
+					label Password
+					.row
+					.col-sm-6.col-md-6
+					input.form-control.input-box(type='password', name='password', placeholder='Password')
+
+				button(type='submit').btn.btn-success SignIn
+
+		
+
+
+		
+		
+		
+		
