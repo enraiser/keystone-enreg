@@ -24,12 +24,7 @@ var routes = function (app) {
 
 var initLocals = function(req, res, next) {	
 	var locals = res.locals;
-	if(req.user){
-		locals.navLinks.push( {label: 'Sign Out',		key: 'signout',		href: '/action/signout' });
-	}else{
-		locals.navLinks.push( {label: 'Sign In',		key: 'signin',		href: '/signin' });
-		locals.navLinks.push( {label: 'Sign Up',		key: 'signup',		href: '/signup' });
-	}
+
 	next();
 	
 };
