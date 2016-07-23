@@ -1,7 +1,8 @@
-keystone-enreg
+![Keystone-enreg](https://www.enraiser.com/mod/enraiser/graphics/site_logo.png)
 =====
 
-* Keystone Registration,Login and Email Verification*
+Keystone Registration,Login and Email Verification
+
 ## Installation
 
 1. create keystone project using yo keystone, and do not choose email feature.
@@ -18,11 +19,15 @@ keystone.init({
 
 }); 
 ```
+
 4. in routes/index.js inside module.exports 
+
 ```javascript
     require('keystone-enreg').routes(app);
 ```
+
 5. add welcome.jade  at templates/emails
+
 ```html
 extends /layouts/default
 
@@ -37,12 +42,16 @@ block body-contents
         p &nbsp;
 
 ```
+
 6. in User model add a boolean field called valid
+
 ```javascript
       valid: { type: Boolean, initial: true},
+```
 
 7. in default.jade change signup and signin links  and add SignUp link
-```jade
+
+```html
     if user
         if user.canAccessKeystone
             li: a(href='/keystone') Open Keystone
@@ -51,3 +60,4 @@ block body-contents
         li: a(href='/signin') Sign In
         li: a(href='/signup') Sign Up
 ```
+
