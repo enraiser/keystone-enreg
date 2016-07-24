@@ -1,7 +1,7 @@
 
 var keystone = require('keystone');
 var User = keystone.list('users');
-if (!process.env.SITE_EMAIL_ADDRESS) throw new Error("Expected SMTP_USER missing one or both.");
+if (!process.env.SITE_EMAIL_ADDRESS) throw new Error("Expected SITE_EMAIL_ADDRESS missing one or both.");
 
 exports = module.exports = function(req, res) {
     var view = new keystone.View(req, res);
