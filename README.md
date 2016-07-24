@@ -8,7 +8,13 @@ Keystone Registration,Login and Email Verification
 1. Create keystone project using yo keystone, and do not choose email feature.
 2. Install keystone-enreg
 
+    ```
     npm install git+https://git@github.com/enraiser/keystone-enreg.git
+    ```
+
+
+## Usage
+
 3. In keystone.js at keystone.init add email template
 
     ```javascript
