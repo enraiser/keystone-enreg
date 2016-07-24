@@ -14,7 +14,7 @@ exports = module.exports = function(req, res) {
 				res.redirect('/');
 			}else{
 				req.flash('success', 'Your account has been activated.');
-				view.render(__dirname + '/../../templates/views/signin');
+				res.redirect('/signin');
 			}
 		});
 	});
