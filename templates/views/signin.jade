@@ -5,6 +5,10 @@ block content
 		if user
 			a(class='btn btn-primary',href='/purchase') Purchase
 		else
+			br
+			br
+			br
+			br
 			form.signup-form(method="post" action="action/signin").row.col-sm-8.col-md-6
 				input(type='hidden', name='action',  value='action/signin')
 
