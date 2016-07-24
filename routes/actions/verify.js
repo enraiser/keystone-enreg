@@ -10,11 +10,13 @@ exports = module.exports = function(req, res) {
 		user.valid = true;
 		user.save(function(err) {
 			if (err) {
-				req.flash('error', 'Your account has been activated.');
+				req.flash('error', 'There is issue in Activating your Account..');
+				res.redirect('/');
 			}else{
 				req.flash('success', 'Your account has been activated.');
+				view.render(__dirname + '/../../templates/views/signin');
 			}
 		});
 	});
-	res.redirect('/');
+	
 };

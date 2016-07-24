@@ -35,7 +35,7 @@ exports = module.exports = function(req, res) {
                 to: newUser.email,
                 from: {
                     name: brand,
-                    email: rocess.env.SMTP_USER
+                    email: process.env.SMTP_USER
                 }
             });
             console.log('email sent');

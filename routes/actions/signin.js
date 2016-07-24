@@ -11,7 +11,7 @@ exports = module.exports = function(req, res) {
     //var emailRegExp = new RegExp('^' + utils.escapeRegExp(req.body.email) + '$', 'i');
     User.model.findOne({ email: req.body.email }).exec(function (err, user) {
         if (user) {
-            if(user.valid){
+            if(user.valid ||  user.canAccessKeystone){
                 keystone.session.signinWithUser(user, req, res, function () {
                         
                     keystone.callHook(user, 'post:signin', function (err) {
@@ -38,5 +38,5 @@ exports = module.exports = function(req, res) {
             view.render(__dirname + '/../../templates/views/signin');
         }
     });
-    
+
 };

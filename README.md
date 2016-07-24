@@ -1,11 +1,11 @@
 ![enRaiser : ](https://www.enraiser.com/mod/enraiser/graphics/site_logo.png) Keystone-enreg
 =====
 
-Keystone Registration,Login and Email Verification
+SignUp,SignIn,SignOut and email Validation for KeystoneJs.
 
 ## Installation
 
-1. Create keystone project using yo keystone, and do not choose email feature.
+1. Create keystone project using `yo keystone`, and do not choose email feature.
 2. Install keystone-enreg
 
     ```
@@ -15,7 +15,7 @@ Keystone Registration,Login and Email Verification
 
 ## Usage
 
-3. In keystone.js at keystone.init add email template
+1. In keystone.js at keystone.init add email template
 
     ```javascript
     keystone.init({
@@ -24,30 +24,30 @@ Keystone Registration,Login and Email Verification
         'siteurl': 'http://mysite.com/',
     }); 
     ```
-4. In routes/index.js inside module.exports 
+2. In routes/index.js inside module.exports 
 
     ```javascript
     require('keystone-enreg').routes(app);
     ```
-5. Add welcome.jade  at templates/emails
+3. Add welcome.jade  at templates/emails
 
     ```html
     extends ../layouts/default
 
     block body-contents
         h1 Hi #{first_name},
-        p.text-larger We would like to verify your EmailID to enroll you on #{brand}:
-                p.text-larger click
-                        a(href='#{link}') 
-                                strong this link
-                        | to complete this verification
+        p.text-larger We would like to verify your EmailID to enroll you on #{brand}.
+        p.text-larger click&nbsp;
+            a(href='#{link}') 
+                strong this link
+            | &nbsp;to complete this verification.
     ```
-6. In User model add a boolean field called valid
+4. In User model add a boolean field called valid
 
     ```javascript
       valid: { type: Boolean, initial: true},
     ```
-7. In default.jade change SignIn and SignOut links  and add SignUp link
+5. In default.jade change SignIn and SignOut links  and add SignUp link
 
     ```html
     if user
