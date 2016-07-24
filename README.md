@@ -5,7 +5,7 @@ SignUp,SignIn,SignOut and email Validation for KeystoneJs.
 
 ## Installation
 
-1. Create keystone project using `yo keystone`, and do not choose email feature.
+1. Create keystone project using `yo keystone`.
 2. Install keystone-enreg
 
     ```
