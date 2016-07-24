@@ -12,28 +12,31 @@ exports = module.exports = function(req, res) {
     User.model.findOne({ email: req.body.email }).exec(function (err, user) {
         if (user) {
             if(user.valid){
-                console.log('user is valid');
                 keystone.session.signinWithUser(user, req, res, function () {
-                    console.log("signinWithUser func");
                         
                     keystone.callHook(user, 'post:signin', function (err) {
                         if (err) {
                             console.log(err);
                             req.flash('error',err);
+                           view.render(__dirname + '/../../templates/views/signin');
                         } else {
-                            console.log('signedin');
-                            req.flash('success','Signed in  Successfully..!!!');    
+                            req.flash('success',"Successfully signed in!");
+                            res.redirect('/');   
                         }
                     });    
                 });
             }else{
                 req.flash('error','Please verify Your EmailID');
+                view.render(__dirname + '/../../templates/views/signin');
             }
-        } else if (err) {
-            req.flash('error','database error'+err);
         } else {
-            req.flash('error','Invalid detail');
+            if (err) {
+                req.flash('error','database error'+err);
+            } else {
+                req.flash('error','Invalid detail');
+            }
+            view.render(__dirname + '/../../templates/views/signin');
         }
-        res.redirect('/');
     });
+    
 };
