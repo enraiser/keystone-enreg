@@ -10,6 +10,7 @@ Keystone Registration,Login and Email Verification
 
     npm install git+https://git@github.com/enraiser/keystone-enreg.git
 3. In keystone.js at keystone.init add email template
+
     ```javascript
     keystone.init({
          ……
@@ -23,6 +24,7 @@ Keystone Registration,Login and Email Verification
     require('keystone-enreg').routes(app);
     ```
 5. Add welcome.jade  at templates/emails
+
     ```html
     extends ../layouts/default
 
@@ -35,10 +37,12 @@ Keystone Registration,Login and Email Verification
                         | to complete this verification
     ```
 6. In User model add a boolean field called valid
+
     ```javascript
       valid: { type: Boolean, initial: true},
     ```
 7. In default.jade change SignIn and SignOut links  and add SignUp link
+
     ```html
     if user
         if user.canAccessKeystone
