@@ -1,8 +1,7 @@
 
 var keystone = require('keystone');
 var User = keystone.list('users');
-var enmailer = require('keystone-enmailer');
-if (!process.env.SMTP_USER) throw new Error("Expected SMTP_USER missing one or both.");
+if (!process.env.SITE_EMAIL_ADDRESS) throw new Error("Expected SMTP_USER missing one or both.");
 
 exports = module.exports = function(req, res) {
     var view = new keystone.View(req, res);
@@ -27,18 +26,20 @@ exports = module.exports = function(req, res) {
             var Email = new keystone.Email('welcome');
             var siteurl = keystone.get('siteurl');
             var brand = keystone.get('brand');
-            Email.send({
-                mandrill: enmailer.mandrill,
+            var options = {
                 first_name: newUser.name.first,
                 link: siteurl+"action/verify?user_id=" +newUser._id,
                 subject: 'Please verify your email',
                 to: newUser.email,
                 from: {
                     name: brand,
-                    email: process.env.SMTP_USER
+                    email: process.env.SITE_EMAIL_ADDRESS
                 }
-            });
-            console.log('email sent');
+            };
+            if (process.env.SMTP_HOST) // to use keystone-enmailer for SMTP emails
+                options.mandrill = require('keystone-enmailer').mandrill;
+
+            Email.send(options);
             req.flash('info', 'Please verify your email');
             res.redirect('/');
         }

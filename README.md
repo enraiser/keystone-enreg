@@ -24,30 +24,34 @@ SignUp,SignIn,SignOut and email Validation for KeystoneJs.
         'siteurl': 'http://mysite.com/',
     }); 
     ```
-2. In routes/index.js inside module.exports 
+2. make sure you have set SITE_EMAIL_ADDRESS in .env file.
+
+    ```
+     SITE_EMAIL_ADDRESS=admin@lastwish.me
+
+    ```
+3. In routes/index.js inside module.exports 
 
     ```javascript
     require('keystone-enreg').routes(app);
     ```
-3. Add welcome.jade  at templates/emails
+4. Add welcome.jade  at templates/emails
 
     ```html
-    extends ../layouts/default
-
     block body-contents
         h1 Hi #{first_name},
         p.text-larger We would like to verify your EmailID to enroll you on #{brand}.
         p.text-larger click&nbsp;
             a(href='#{link}') 
                 strong this link
-            | &nbsp;to complete this verification.
+            |  &nbsp; to complete this verification.
     ```
-4. In User model add a boolean field called valid
+5. In User model add a boolean field called valid
 
     ```javascript
       valid: { type: Boolean, initial: true},
     ```
-5. In default.jade change SignIn and SignOut links  and add SignUp link
+6. In default.jade change SignIn and SignOut links  and add SignUp link
 
     ```html
     if user
