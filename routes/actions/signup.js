@@ -4,7 +4,6 @@ var User = keystone.list('users');
 if (!process.env.SITE_EMAIL_ADDRESS) throw new Error("Expected SITE_EMAIL_ADDRESS missing one or both.");
 
 exports = module.exports = function(req, res) {
-    var view = new keystone.View(req, res);
     var newUser = User.model({
     	name: {first: req.body.first,last: req.body.last},
     	email: req.body.email,
@@ -21,7 +20,7 @@ exports = module.exports = function(req, res) {
         if (err) {
             console.log(err);
             req.flash('warning', 'Signup issue');
-            view.render(__dirname + '/../../templates/views/signup');
+             res.redirect('/signup');
         } else {
             var Email = new keystone.Email('welcome');
             var siteurl = keystone.get('siteurl');

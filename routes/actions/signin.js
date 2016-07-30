@@ -1,33 +1,28 @@
 //var utils = require('keystone-utils');
 var keystone = require('keystone');
 exports = module.exports = function(req, res) {
-    
-    var view = new keystone.View(req, res);
 
     if (!req.body.email || !req.body.password) {
-        return res.status(401).json({ error: 'email and password required' });
+        req.flash('error','email and password required');
+        res.redirect('/signin');
+        return;
     }
     var User = keystone.list(keystone.get('user model'));
     //var emailRegExp = new RegExp('^' + utils.escapeRegExp(req.body.email) + '$', 'i');
     User.model.findOne({ email: req.body.email }).exec(function (err, user) {
         if (user) {
             if(user.valid ||  user.canAccessKeystone){
-                keystone.session.signinWithUser(user, req, res, function () {
-                        
-                    keystone.callHook(user, 'post:signin', function (err) {
-                        if (err) {
-                            console.log(err);
-                            req.flash('error',err);
-                           view.render(__dirname + '/../../templates/views/signin');
-                        } else {
-                            req.flash('success',"Successfully signed in!");
-                            res.redirect('/');   
-                        }
-                    });    
-                });
+                 keystone.session.signin({ email: req.body.email, password: req.body.password }, req, res, function(user) {
+                    req.flash('success',"Successfully signed in!");
+                    res.redirect('/'); 
+                 }, function(err) {
+                    console.log(err);
+                    req.flash('error',err);
+                    res.redirect('/signin');
+                 });
             }else{
                 req.flash('error','Please verify Your EmailID');
-                view.render(__dirname + '/../../templates/views/signin');
+                res.redirect('/signin');
             }
         } else {
             if (err) {
@@ -35,7 +30,7 @@ exports = module.exports = function(req, res) {
             } else {
                 req.flash('error','Invalid detail');
             }
-            view.render(__dirname + '/../../templates/views/signin');
+            res.redirect('/signin');
         }
     });
 
